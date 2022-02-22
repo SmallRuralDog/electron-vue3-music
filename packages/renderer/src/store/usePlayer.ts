@@ -57,7 +57,6 @@ export const usePlayer = defineStore('player', () => {
     function next() {
         play(1909651843)
     }
-
     //上一曲
     function prev() {
     }
