@@ -42,6 +42,8 @@
     "vue-tsc": "^0.31.4"
   },
   "dependencies": {
+    "@splidejs/splide": "^3.6.12",
+    "@splidejs/vue-splide": "^0.5.18",
     "axios": "^0.26.0",
     "lodash": "^4.17.21",
     "pinia": "^2.0.11"

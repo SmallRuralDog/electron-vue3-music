@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-between drag pt-5">
+  <div class="flex items-center justify-between drag pt-4">
     <div class="flex items-center pl-5">
       <NButton circle quaternary round @click="router.back()">
         <NIcon :component="ChevronLeft20Regular" size="20"/>

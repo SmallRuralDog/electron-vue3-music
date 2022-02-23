@@ -1,7 +1,12 @@
 <template>
   <div class="player-slider">
-    <VueSlider v-model="player.currentTime" :max="player.duration" :height="2" tooltip="none" :dotSize="7"
-               class="cursor-pointer my-0.5 flex-shrink-0" @change="setCurrentTime" @dragging="player.sliderInput=true"
+    <VueSlider v-model="player.currentTime" :max="parseInt(player.duration.toString())" :height="2" tooltip="none" :dotSize="7"
+               :disabled="player.duration<=0"
+               class="cursor-pointer flex-shrink-0"
+
+               @change="setCurrentTime"
+               @dragging="player.sliderInput=true"
+               @drag-start="player.sliderInput=true"
                @drag-end="dragEnd">
       <template v-slot:dot="{ value, focus }">
         <div :class="['custom-dot', { focus }]"></div>
@@ -19,7 +24,7 @@ import VueSlider from 'vue-slider-component'
 import {usePlayer} from "@/store/usePlayer";
 
 
-const {player, setCurrentTime,dragEnd} = usePlayer();
+const {player, setCurrentTime, dragEnd} = usePlayer();
 
 </script>
 

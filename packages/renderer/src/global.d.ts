@@ -8,4 +8,6 @@ declare global {
     ipcRenderer: import('electron').IpcRenderer
     removeLoading: () => void
   }
+
+  declare module '*.png'
 }

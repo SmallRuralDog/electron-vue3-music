@@ -15,6 +15,10 @@ interface SongUrl {
     freeTrialPrivilege: RootObjectFreeTrialPrivilege;
     freeTimeTrialPrivilege: RootObjectFreeTimeTrialPrivilege;
     urlSource: number;
+    freeTrialInfo:{
+        start:number
+        end:number
+    }
 }
 
 interface RootObjectFreeTrialPrivilege {

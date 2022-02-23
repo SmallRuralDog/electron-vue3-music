@@ -3,6 +3,7 @@ import {createPinia} from 'pinia'
 import router from "./router/router";
 import App from "./App.vue";
 import "vfonts/FiraCode.css";
+import '@splidejs/splide/dist/css/splide.min.css';
 import "@/assets/base.scss";
 import "@/utils/extend"
 

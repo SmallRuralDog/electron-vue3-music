@@ -1,6 +1,6 @@
-import { app, BrowserWindow, shell } from "electron";
-import { release } from "os";
-import { join } from "path";
+import {app, BrowserWindow, shell} from "electron";
+import {release} from "os";
+import {join} from "path";
 
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith("6.1")) app.disableHardwareAcceleration();
@@ -9,67 +9,67 @@ if (release().startsWith("6.1")) app.disableHardwareAcceleration();
 if (process.platform === "win32") app.setAppUserModelId(app.getName());
 
 if (!app.requestSingleInstanceLock()) {
-  app.quit();
-  process.exit(0);
+    app.quit();
+    process.exit(0);
 }
 
 let win: BrowserWindow | null = null;
 
 async function createWindow() {
-  win = new BrowserWindow({
-    title: "音乐播放器",
-    width: 1200,
-    height: 800,
-    minHeight: 800,
-    minWidth: 1200,
-    titleBarStyle: "hidden",
-    webPreferences: {
-      preload: join(__dirname, "../preload/index.cjs"),
-    },
-  });
+    win = new BrowserWindow({
+        title: "音乐播放器",
+        width: 1050,
+        height: 670,
+        minHeight: 670,
+        minWidth: 1050,
+        titleBarStyle: "hidden",
+        webPreferences: {
+            preload: join(__dirname, "../preload/index.cjs"),
+        },
+    });
 
-  if (app.isPackaged || process.env["DEBUG"]) {
-    win.loadFile(join(__dirname, "../renderer/index.html"));
-  } else {
-    // 🚧 Use ['ENV_NAME'] avoid vite:define plugin
-    const url = `http://${process.env["VITE_DEV_SERVER_HOST"]}:${process.env["VITE_DEV_SERVER_PORT"]}`;
+    if (app.isPackaged || process.env["DEBUG"]) {
+        await win.loadFile(join(__dirname, "../renderer/index.html"));
+    } else {
+        // 🚧 Use ['ENV_NAME'] avoid vite:define plugin
+        const url = `http://${process.env["VITE_DEV_SERVER_HOST"]}:${process.env["VITE_DEV_SERVER_PORT"]}`;
 
-    win.loadURL(url);
-    win.webContents.openDevTools()
-  }
+        await win.loadURL(url);
+        win.webContents.openDevTools()
+    }
 
-  // Test active push message to Renderer-process
-  win.webContents.on("did-finish-load", () => {
-    win?.webContents.send("main-process-message", new Date().toLocaleString());
-  });
+    // Test active push message to Renderer-process
+    win.webContents.on("did-finish-load", () => {
+        win?.webContents.send("main-process-message", new Date().toLocaleString());
+    });
 
-  // Make all links open with the browser, not with the application
-  win.webContents.setWindowOpenHandler(({ url }) => {
-    if (url.startsWith("https:")) shell.openExternal(url);
-    return { action: "deny" };
-  });
+    // Make all links open with the browser, not with the application
+    win.webContents.setWindowOpenHandler(({url}) => {
+        if (url.startsWith("https:")) shell.openExternal(url);
+        return {action: "deny"};
+    });
 }
 
 app.whenReady().then(createWindow);
 
 app.on("window-all-closed", () => {
-  win = null;
-  if (process.platform !== "darwin") app.quit();
+    win = null;
+    if (process.platform !== "darwin") app.quit();
 });
 
 app.on("second-instance", () => {
-  if (win) {
-    // Focus on the main window if the user tried to open another
-    if (win.isMinimized()) win.restore();
-    win.focus();
-  }
+    if (win) {
+        // Focus on the main window if the user tried to open another
+        if (win.isMinimized()) win.restore();
+        win.focus();
+    }
 });
 
-app.on("activate", () => {
-  const allWindows = BrowserWindow.getAllWindows();
-  if (allWindows.length) {
-    allWindows[0].focus();
-  } else {
-    createWindow();
-  }
+app.on("activate", async () => {
+    const allWindows = BrowserWindow.getAllWindows();
+    if (allWindows.length) {
+        allWindows[0].focus();
+    } else {
+        await createWindow();
+    }
 });

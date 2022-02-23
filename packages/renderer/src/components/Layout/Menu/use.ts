@@ -47,22 +47,22 @@ export function userMenu() {
             menus: [
                 {
                     name: "我喜欢",
-                    key: "discover",
+                    key: "love",
                     icon: Heart20Filled,
                 },
                 {
                     name: "本地歌曲",
-                    key: "music",
+                    key: "local",
                     icon: Desktop20Filled,
                 },
                 {
                     name: "下载歌曲",
-                    key: "video",
+                    key: "download",
                     icon: ArrowCircleDown20Filled,
                 },
                 {
                     name: "最近播放",
-                    key: "broadcast",
+                    key: "recently",
                     icon: Timer28Filled,
                 },
             ]

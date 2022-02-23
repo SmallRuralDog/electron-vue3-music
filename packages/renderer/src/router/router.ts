@@ -7,6 +7,7 @@ const router = createRouter({
             path: "/",
             name: "index",
             component: () => import("@/views/Index.vue"),
+            redirect: {name: 'discover'},
             children: [
                 {
                     path: 'discover',
@@ -15,6 +16,11 @@ const router = createRouter({
                     meta: {
                         menu: 'discover',
                     }
+                },
+                {
+                    path: 'playlist',
+                    name: 'playlist',
+                    component: () => import('@/views/playlist/PlayList.vue'),
                 }
             ]
         }
