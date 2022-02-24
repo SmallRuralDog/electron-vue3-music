@@ -11,10 +11,11 @@ import {
     create,
     NButton,
     NIcon,
+    NEllipsis,
 } from "naive-ui";
 
 const naive = create({
-    components: [NButton, NIcon],
+    components: [NButton, NIcon, NEllipsis],
 });
 
 createApp(App)

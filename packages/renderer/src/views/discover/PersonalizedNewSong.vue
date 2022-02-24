@@ -1,6 +1,6 @@
 <template>
   <Title title="推荐新音乐"/>
-  <div class="grid grid-flow-row grid-cols-2 gap-y-2.5 gap-x-5 cursor-pointer">
+  <div class="grid grid-flow-row grid-cols-2 2xl:grid-cols-5 gap-y-2.5 gap-x-5 cursor-pointer">
     <div v-for="(item,index) in data" :key="index"
          class="hover:bg-gray-100 transition-all flex items-center" @click="play(item.id)">
       <img :src="item.picUrl" alt="" class="w-12 h-12 object-cover rounded "/>

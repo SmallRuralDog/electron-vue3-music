@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="text-xs text-gray-500 leading-normal">
-          <MoreText :text=" playlist.description" :end="100"/>
+          <MoreText :text=" playlist.description" :end="90"/>
         </div>
       </div>
       <div class="justify-self-stretch mt-5 gap-x-2 flex items-center">

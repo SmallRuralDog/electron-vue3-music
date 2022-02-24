@@ -18,6 +18,30 @@ const router = createRouter({
                     }
                 },
                 {
+                    path: 'music',
+                    name: 'music',
+                    component: () => import("@/views/music/Music.vue"),
+                    redirect: {name: 'picked'},
+                    children: [
+                        {
+                            path: 'picked',
+                            name: 'picked',
+                            component: () => import("@/views/music/picked/Picked.vue"),
+                            meta: {
+                                menu: 'music',
+                            }
+                        },
+                        {
+                            path: 'toplist',
+                            name: 'toplist',
+                            component: () => import("@/views/music/toplist/TopList.vue"),
+                            meta: {
+                                menu: 'music',
+                            }
+                        }
+                    ]
+                },
+                {
                     path: 'playlist',
                     name: 'playlist',
                     component: () => import('@/views/playlist/PlayList.vue'),

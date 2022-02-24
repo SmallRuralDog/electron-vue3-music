@@ -1,5 +1,6 @@
 import http from "@/utils/http";
 
+
 export async function useSongUrl(id: number) {
     const {data} = await http.get<{ data: SongUrl[] }>('/song/url', {id: id})
     return data.first()
@@ -31,6 +32,7 @@ export async function usePlayListDetail(id: number, s: number = 8) {
     return {playlist, songs}
 }
 
-export async function usePlayListTrackAll() {
-
+export async function useTopListDetail() {
+    const {list} = await http.get<{ list: TopListDetail[] }>('/toplist/detail')
+    return list
 }

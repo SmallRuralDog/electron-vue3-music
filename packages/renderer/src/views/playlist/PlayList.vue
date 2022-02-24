@@ -1,7 +1,7 @@
 <template>
-  <div class="p-5" v-if="playlist">
-    <Info :playlist="playlist"/>
-    <div class="mt-5">
+  <div class="p-5" >
+    <Info :playlist="playlist" v-if="playlist"/>
+    <div class="mt-5" v-if="playlist">
       <NTabs>
         <NTabPane :name="`歌曲 ${songs?.length || ''}`">
           <SongList :songs="songs"/>

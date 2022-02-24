@@ -18,6 +18,7 @@ export const usePlayer = defineStore('player', () => {
         isPlaying: false, //是否播放中
         isPause: false,//是否暂停
         sliderInput: false,//是否正在拖动进度条
+        ended: false,//是否播放结束
         muted: false,//是否静音
         currentTime: 0,//当前播放时间
         duration: 0,//总播放时长
@@ -27,16 +28,24 @@ export const usePlayer = defineStore('player', () => {
     function init() {
         player.audio.muted = player.muted
         player.audio.volume = player.volume / 100
-        player.audio.loop = true
     }
 
     //音乐详情
     watch(() => player.id, async id => {
         await songDetail()
     })
+    watch(() => player.ended, ended => {
+        if (ended) {
+            playEnd()
+        }
+    })
 
     async function songDetail() {
         player.song = await useDetail(player.id)
+    }
+
+    async function playEnd() {
+        console.log('播放结束')
     }
 
     //播放歌曲
@@ -69,6 +78,7 @@ export const usePlayer = defineStore('player', () => {
 
     //播放、暂停
     function togglePlay() {
+        if (!player.song.id) return;
         player.isPlaying = !player.isPlaying
         if (!player.isPlaying) {
             player.audio.pause();
@@ -125,6 +135,7 @@ export const usePlayer = defineStore('player', () => {
             if (player.isPlaying && !player.sliderInput) {
                 player.currentTime = parseInt(player.audio.currentTime.toString());
                 player.duration = parseInt(player.audio.duration.toString());
+                player.ended = player.audio.ended
             }
 
         }, 1000)

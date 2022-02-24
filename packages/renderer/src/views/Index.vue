@@ -9,7 +9,10 @@
       </div>
       <div class="flex-1 overflow-hidden">
         <NScrollbar>
-          <RouterView/>
+          <div class="container mx-auto">
+            <RouterView/>
+          </div>
+
         </NScrollbar>
       </div>
       <div class="h-20">
